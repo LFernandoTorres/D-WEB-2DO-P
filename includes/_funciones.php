@@ -73,7 +73,7 @@ switch ($_POST["accion"]) {
 		case 'eliminar_works':
 	eliminar_works($_POST["id"]);
 	break;
-	case 'ceditar_works':
+	case 'ceditar_features':
 	ceditar_features($_POST["id"]);
 	break;
 	case 'editar_works':
@@ -389,6 +389,7 @@ function eliminar_ourteam($id){
 	global $mysqli;
 	$consulta = "DELETE FROM ourteam WHERE id_our = $id";
 	$resultado = mysqli_query($mysqli, $consulta);
+	// print_r($resultado);
 	if ($resultado) {
 		echo "Se elimino correctamente";
 	}
@@ -439,9 +440,8 @@ function insertar_testimonials(){
 }
 function eliminar_testimonials($id){
 	global $mysqli;
-	$consulta = "DELETE FROM usuarios WHERE id_usr = $id";
+	$consulta = "DELETE FROM testimonial WHERE id_tes = $id";
 	$resultado = mysqli_query($mysqli, $consulta);
-	// print_r($resultado);
 	if ($resultado) {
 		echo "Se elimino correctamente";
 	}
@@ -451,28 +451,20 @@ function eliminar_testimonials($id){
 }
 function ceditar_testimonials($id){
 	global $mysqli;
-	$consulta = "SELECT * FROM usuarios WHERE id_usr = '$id'";
+	$consulta = "SELECT * FROM testimonial WHERE id_tes = '$id'";
 	$resultado = mysqli_query($mysqli, $consulta);
-	// $arreglo = [];
-	// while($fila = mysqli_fetch_array($resultado)){
-	// 	array_push($arreglo, $fila);
-	// }
-	// echo json_encode($arreglo);
-
-	// }
 	$fila = mysqli_fetch_array($resultado);
 	    echo json_encode($fila);
 	}
 
 function editar_testimonials($id){
 	global $mysqli;
-	$nombre_usr = $_POST["nombre"];
-	$correo_usr = $_POST["correo"];	
-	$password = $_POST["password"];	
-	$telefono_usr = $_POST["telefono"];
-	$consultain = "UPDATE usuarios SET nombre_usr = '$nombre_usr',correo_usr = '$correo_usr', password = '$password', telefono_usr = '$telefono_usr' WHERE id_usr = $id";
+	$img_tes = $_POST["imagen"];
+	$cita_tes = $_POST["cita"];	
+	$persona_tes = $_POST["persona"];	
+	$consultain = "UPDATE testimonial SET img_tes = '$img_tes',cita_tes = '$cita_tes', persona_tes = '$persona_tes' WHERE id_tes = $id";
 	$resultadoin = mysqli_query($mysqli, $consultain);
-    echo "Se edito el usuario correctamente";
+    echo "Se edito el testimonial correctamente";
 }
 /////DOWNLOADS
 function consultar_download(){
@@ -500,9 +492,8 @@ function insertar_download(){
 }
 function eliminar_download($id){
 	global $mysqli;
-	$consulta = "DELETE FROM usuarios WHERE id_usr = $id";
+	$consulta = "DELETE FROM download WHERE id_do = $id";
 	$resultado = mysqli_query($mysqli, $consulta);
-	// print_r($resultado);
 	if ($resultado) {
 		echo "Se elimino correctamente";
 	}
@@ -512,28 +503,21 @@ function eliminar_download($id){
 }
 function ceditar_download($id){
 	global $mysqli;
-	$consulta = "SELECT * FROM usuarios WHERE id_usr = '$id'";
+	$consulta = "SELECT * FROM download WHERE id_do = '$id'";
 	$resultado = mysqli_query($mysqli, $consulta);
-	// $arreglo = [];
-	// while($fila = mysqli_fetch_array($resultado)){
-	// 	array_push($arreglo, $fila);
-	// }
-	// echo json_encode($arreglo);
-
-	// }
 	$fila = mysqli_fetch_array($resultado);
 	    echo json_encode($fila);
 	}
 
 function editar_download($id){
 	global $mysqli;
-	$nombre_usr = $_POST["nombre"];
-	$correo_usr = $_POST["correo"];	
-	$password = $_POST["password"];	
-	$telefono_usr = $_POST["telefono"];
-	$consultain = "UPDATE usuarios SET nombre_usr = '$nombre_usr',correo_usr = '$correo_usr', password = '$password', telefono_usr = '$telefono_usr' WHERE id_usr = $id";
+	$titulo_do = $_POST["titulo"];
+	$subtitulo_do = $_POST["subtitulo"];	
+	$boton_do = $_POST["boton"];	
+	$consultain = "UPDATE download SET titulo_do = '$titulo_do',subtitulo_do = '$subtitulo_do', boton_do = '$boton_do' 
+	WHERE id_do = $id";
 	$resultadoin = mysqli_query($mysqli, $consultain);
-    echo "Se edito el usuario correctamente";
+    echo "Se edito download correctamente";
 }
 
 function carga_foto(){
@@ -543,7 +527,7 @@ function carga_foto(){
 		$temporal = $_FILES["foto"]["tmp_name"];
 		$tipo = $_FILES["foto"]["type"];
 		$tam = $_FILES["foto"]["size"];
-		$dir = "img/usuarios/";
+		$dir = "../img/usuarios/";
 		$respuesta = [
 			"archivo" => "img/usuarios/logotipo.png",
 			"status" => 0
