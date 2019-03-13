@@ -140,7 +140,7 @@
         }
       });
       if($(this).data("editar") == 1){
-          obj["accion"] = "ceditar_downloads";
+          obj["accion"] = "editar_downloads";
           obj["id"] = $(this).data("id");
           $(this).text("Guardar").data("editar",0);
           $("#form_data")[0].reset();
@@ -194,9 +194,9 @@ consultar();
     change_view('insert_data');
     $("#guardar_datos").text("Editar").data("editar",1).data("id", id);
     $.post('includes/_funciones.php', obj, function(r){
-      $("#titulo_do").val(r.titulo_do);
-      $("#subtitulo_do").val(r.subtitulo_do);
-      $("#boton_do").val(r.boton_do);      
+      $("#titulo").val(r.titulo_do);
+      $("#subtitulo").val(r.subtitulo_do);
+      $("#boton").val(r.boton_do);      
         }, "JSON");
 
         consultar();          
