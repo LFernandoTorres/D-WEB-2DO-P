@@ -197,9 +197,9 @@ consultar();
     change_view('insert_data');
     $("#guardar_datos").text("Editar").data("editar",1).data("id", id);
     $.post('includes/_funciones.php', obj, function(r){
-      $("#img_our").val(r.img_our);
-      $("#nombre_our").val(r.nombre_our);
-      $("#cargo_our").val(r.cargo_our);
+      $("#imagen").val(r.img_our);
+      $("#nombre").val(r.nombre_our);
+      $("#cargo").val(r.cargo_our);
         }, "JSON");
 
         consultar();          

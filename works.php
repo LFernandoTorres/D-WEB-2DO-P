@@ -186,7 +186,7 @@ consultar();
 });
 
 //** EDITAR **//
-    $('#list-usuarios').on("click",".ceditar_works", function(e){
+    $('#list-works').on("click",".ceditar_works", function(e){
         e.preventDefault();
     let id = $(this).data('id');
          obj = {
@@ -197,9 +197,9 @@ consultar();
     change_view('insert_data');
     $("#guardar_datos").text("Editar").data("editar",1).data("id", id);
     $.post('includes/_funciones.php', obj, function(r){
-      $("#img_wo").val(r.img_wo);
-      $("#proyect_name_wo").val(r.proyect_name_wo);
-      $("#website_design_wo").val(r.website_design_wo);   
+      $("#imagen").val(r.img_wo);
+      $("#proyecto").val(r.proyect_name_wo);
+      $("#website").val(r.website_design_wo);   
         }, "JSON");
 
         consultar();          
