@@ -580,12 +580,13 @@ function carga_foto(){
 				else if($correo == $fila["correo_usr"] && $pass == $fila["password"])
 				{
 					// 			Si el password es correcto imprimir = 1 
-					echo "El Usuario y Password son Correctos [ACESSO-01]"	;
 					session_start();
 					error_reporting(0);
 					$_SESSION['usuarios']=$correo;
 					echo $correo;
-					echo $_SESSION['usuarios'];				}
+					echo $_SESSION['usuarios'];				
+					echo "El Usuario y Password son Correctos [ACESSO-01]"	;
+				}
 			}
 
 ?>
