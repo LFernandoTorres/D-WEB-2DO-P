@@ -29,19 +29,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>  
 <script>
+
     $("#buttonSign").click(function(){
     let correo = $("#inputEmail").val();
     let pass = $("#inputPassword").val();
     let obj = {
-      "action" : "login",
+      "accion" : "login",
       "correo" : correo,
       "password" : pass  
     };
     if (correo == "" || pass == "") {
-       alert("Ingresa Correo y Contraseña [ERROR-03]");
+
+       alert("Ingresa Correo y Contraseña correctos");
     } 
     else{
-    $.post('includes/_funciones.php', obj, function() {});
+
+    $.post('includes/_funciones.php', obj, function() {
+         window.location.replace("usuarios.php");
+    });
+
     }
     
 });

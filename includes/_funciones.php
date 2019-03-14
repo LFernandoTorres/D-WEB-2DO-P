@@ -73,8 +73,8 @@ switch ($_POST["accion"]) {
 		case 'eliminar_works':
 	eliminar_works($_POST["id"]);
 	break;
-	case 'ceditar_features':
-	ceditar_features($_POST["id"]);
+	case 'ceditar_works':
+	ceditar_works($_POST["id"]);
 	break;
 	case 'editar_works':
 	editar_works($_POST["id"]);
@@ -290,7 +290,7 @@ function eliminar_features($id){
 }
 function ceditar_features($id){
 	global $mysqli;
-	$consulta = "SELECT * FROM features WHERE id_usr = '$id'";
+	$consulta = "SELECT * FROM features WHERE id_fe = '$id'";
 	$resultado = mysqli_query($mysqli, $consulta);
 	$fila = mysqli_fetch_array($resultado);
 	    echo json_encode($fila);
@@ -346,7 +346,6 @@ function ceditar_works($id){
 	global $mysqli;
 	$consulta = "SELECT * FROM works WHERE id_wo = '$id'";
 	$resultado = mysqli_query($mysqli, $consulta);
-
 	$fila = mysqli_fetch_array($resultado);
 	    echo json_encode($fila);
 	}
@@ -440,8 +439,9 @@ function insertar_testimonials(){
 }
 function eliminar_testimonials($id){
 	global $mysqli;
-	$consulta = "DELETE FROM testimonial WHERE id_tes = $id";
+	$consulta = "DELETE FROM usuarios WHERE id_usr = $id";
 	$resultado = mysqli_query($mysqli, $consulta);
+	// print_r($resultado);
 	if ($resultado) {
 		echo "Se elimino correctamente";
 	}
@@ -451,46 +451,31 @@ function eliminar_testimonials($id){
 }
 function ceditar_testimonials($id){
 	global $mysqli;
-	$consulta = "SELECT * FROM testimonial WHERE id_tes = '$id'";
+	$consulta = "SELECT * FROM usuarios WHERE id_usr = '$id'";
 	$resultado = mysqli_query($mysqli, $consulta);
+	// $arreglo = [];
+	// while($fila = mysqli_fetch_array($resultado)){
+	// 	array_push($arreglo, $fila);
+	// }
+	// echo json_encode($arreglo);
+
+	// }
 	$fila = mysqli_fetch_array($resultado);
 	    echo json_encode($fila);
 	}
 
 function editar_testimonials($id){
 	global $mysqli;
-	$img_tes = $_POST["imagen"];
-	$cita_tes = $_POST["cita"];	
-	$persona_tes = $_POST["persona"];	
-	$consultain = "UPDATE testimonial SET img_tes = '$img_tes',cita_tes = '$cita_tes', persona_tes = '$persona_tes' WHERE id_tes = $id";
+	$nombre_usr = $_POST["nombre"];
+	$correo_usr = $_POST["correo"];	
+	$password = $_POST["password"];	
+	$telefono_usr = $_POST["telefono"];
+	$consultain = "UPDATE usuarios SET nombre_usr = '$nombre_usr',correo_usr = '$correo_usr', password = '$password', telefono_usr = '$telefono_usr' WHERE id_usr = $id";
 	$resultadoin = mysqli_query($mysqli, $consultain);
-    echo "Se edito el testimonial correctamente";
+    echo "Se edito el usuario correctamente";
 }
-/////DOWNLOADS
-function consultar_download(){
-	global $mysqli;
-	$consulta = "SELECT * FROM download";
-	$resultado = mysqli_query($mysqli, $consulta);
-	$arreglo = [];
-	while($fila = mysqli_fetch_array($resultado)){
-		array_push($arreglo, $fila);
-	}
-	echo json_encode($arreglo); //Imprime el JSON ENCODEADO
-}
-function insertar_download(){
-	global $mysqli;
-	$titulo_do = $_POST["titulo"];
-	$subtitulo_do = $_POST["subtitulo"];	
-	$boton_do = $_POST["boton"];	
-	$consultain = "INSERT INTO download VALUES('','$titulo_do','$subtitulo_do','$boton_do')";
-	$resultadoin = mysqli_query($mysqli, $consultain);
-	$arregloin = [];
-	while($filain = mysqli_fetch_array($resultadoin)){
-		array_push($arregloin, $filain);
-	}
-	echo json_encode($arregloin); //Imprime el JSON ENCODEADO
-}
-function eliminar_download($id){
+///// DOWNLOADS ////
+function eliminar_downloads($id){
 	global $mysqli;
 	$consulta = "DELETE FROM download WHERE id_do = $id";
 	$resultado = mysqli_query($mysqli, $consulta);
@@ -501,7 +486,7 @@ function eliminar_download($id){
 		echo "Se genero un error intenta nuevamente";
 	}
 }
-function ceditar_download($id){
+function editar_downloads($id){
 	global $mysqli;
 	$consulta = "SELECT * FROM download WHERE id_do = '$id'";
 	$resultado = mysqli_query($mysqli, $consulta);
@@ -509,7 +494,7 @@ function ceditar_download($id){
 	    echo json_encode($fila);
 	}
 
-function editar_download($id){
+function ceditar_downloads($id){
 	global $mysqli;
 	$titulo_do = $_POST["titulo"];
 	$subtitulo_do = $_POST["subtitulo"];	
@@ -572,8 +557,11 @@ function carga_foto(){
 				{
 					// 			Si el password es correcto imprimir = 1 
 					echo "El Usuario y Password son Correctos [ACESSO-01]"	;
-					
-				}
+					session_start();
+					error_reporting(0);
+					$_SESSION['usuarios']=$correo;
+					echo $correo;
+					echo $_SESSION['usuarios'];				}
 			}
 
 ?>
