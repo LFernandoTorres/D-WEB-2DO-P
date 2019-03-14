@@ -239,7 +239,6 @@ consultar();
             if ($("#guardar_datos").data("editar") == 1) {
         $("#guardar_datos").text("Guardar").data("editar",0);
       }
-
     });
   </script>
 </body>
