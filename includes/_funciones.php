@@ -475,6 +475,29 @@ function editar_testimonials($id){
     echo "Se edito el usuario correctamente";
 }
 ///// DOWNLOADS ////
+function consultar_download(){
+	global $mysqli;
+	$consulta = "SELECT * FROM download";
+	$resultado = mysqli_query($mysqli, $consulta);
+	$arreglo = [];
+	while($fila = mysqli_fetch_array($resultado)){
+		array_push($arreglo, $fila);
+	}
+	echo json_encode($arreglo); //Imprime el JSON ENCODEADO
+}
+function insertar_download(){
+	global $mysqli;
+	$titulo_do = $_POST["titulo"];
+	$subtitulo_do = $_POST["subtitulo"];	
+	$boton_do = $_POST["boton"];	
+	$consultain = "INSERT INTO download VALUES('','$titulo_do','$subtitulo_do','$boton_do' )";
+	$resultadoin = mysqli_query($mysqli, $consultain);
+	$arregloin = [];
+	while($filain = mysqli_fetch_array($resultadoin)){
+		array_push($arregloin, $filain);
+	}
+	echo json_encode($arregloin); //Imprime el JSON ENCODEADO
+}
 function eliminar_downloads($id){
 	global $mysqli;
 	$consulta = "DELETE FROM download WHERE id_do = $id";
@@ -486,7 +509,7 @@ function eliminar_downloads($id){
 		echo "Se genero un error intenta nuevamente";
 	}
 }
-function editar_downloads($id){
+function ceditar_downloads($id){
 	global $mysqli;
 	$consulta = "SELECT * FROM download WHERE id_do = '$id'";
 	$resultado = mysqli_query($mysqli, $consulta);
@@ -494,7 +517,7 @@ function editar_downloads($id){
 	    echo json_encode($fila);
 	}
 
-function ceditar_downloads($id){
+function editar_downloads($id){
 	global $mysqli;
 	$titulo_do = $_POST["titulo"];
 	$subtitulo_do = $_POST["subtitulo"];	
@@ -504,6 +527,7 @@ function ceditar_downloads($id){
 	$resultadoin = mysqli_query($mysqli, $consultain);
     echo "Se edito download correctamente";
 }
+
 
 function carga_foto(){
 	if (isset($_FILES["foto"])) {

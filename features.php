@@ -44,7 +44,7 @@
               <div class="col">
                 <div class="form-group">
                   <label for="imagen">Ruta Imagen</label>
-                  <input type="file" id="imagen" name="imagen" class="form-control">
+                  <input type="text" id="imagen" name="imagen" class="form-control">
                 </div>
                 <div class="form-group">
                   <label for="titulo">Titulo</label>
@@ -58,6 +58,12 @@
                 </div>
               </div>
             </div>
+            <div class="form-group">
+                  <input type="file" name="foto" id="foto">
+                  <input type="hidden" name="ruta" id="ruta" readonly="readonly">
+                </div>
+                <div id="preview"></div>
+              </div>
             <div class="row">
               <div class="col">
                 <button type="button" class="btn btn-success" id="guardar_datos">Guardar</button>
@@ -180,6 +186,31 @@ consultar();
 
 
 });
+
+///// FUNCTION PHOTO  //////
+    $("#foto").on("change", function (e) {
+      let formDatos = new FormData($("#form_data")[0]);
+      formDatos.append("accion", "carga_foto");
+      $.ajax({
+        url: "includes/_funciones.php",
+        type: "POST",
+        data: formDatos,
+        contentType: false,
+        processData: false,
+        success: function (datos) {
+          let respuesta = JSON.parse(datos);
+          if(respuesta.status == 0){
+            alert("No se cargó la foto");
+          }
+          let template = `
+          <img src="${respuesta.archivo}" alt="" class="img-fluid" />
+          `;
+          $("#ruta").val(respuesta.archivo);
+          $("#preview").html(template);
+        }
+      });
+    });
+
 
 //** EDITAR **//
     $('#list-features').on("click",".ceditar_features", function(e){
