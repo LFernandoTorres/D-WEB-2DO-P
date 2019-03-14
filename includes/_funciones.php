@@ -70,7 +70,7 @@ switch ($_POST["accion"]) {
 	case 'insertar_works':
 	insertar_works();
 	break;
-		case 'eliminar_works':
+	case 'eliminar_works':
 	eliminar_works($_POST["id"]);
 	break;
 	case 'ceditar_works':
@@ -87,7 +87,7 @@ switch ($_POST["accion"]) {
 	case 'insertar_ourteam':
 	insertar_ourteam();
 	break;
-		case 'eliminar_ourteam':
+	case 'eliminar_ourteam':
 	eliminar_ourteam($_POST["id"]);
 	break;
 	case 'ceditar_ourteam':
