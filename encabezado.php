@@ -204,6 +204,7 @@ consultar();
         $("#guardar_datos").text("Guardar").data("editar",0);
       }
     });
+    
   </script>
 </body>
 </html>
